@@ -56,6 +56,17 @@ class _SplashState extends State<Splash> {
               height: 10,
             ),
             const Text(
+              "We show news for you",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.orange,
+                fontSize: 15,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
               "Click on skip to see the news",
               textAlign: TextAlign.center,
               style: TextStyle(
