@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:newsapp/home.dart';
 
 class Splash extends StatefulWidget {
-  Splash({Key? key}) : super(key: key);
+  const Splash({Key? key}) : super(key: key);
 
   @override
   State<Splash> createState() => _SplashState();
@@ -12,6 +12,7 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash> {
   @override
+  //function for switiching to home screen in 5 seconds
   void initState() {
     new Future.delayed(
       const Duration(seconds: 5),
@@ -91,6 +92,7 @@ class _SplashState extends State<Splash> {
                     // minimumSize: const Size.fromWidth(100),
                   ),
                   onPressed: () {
+                    //routing on home screen if the button is clicked
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: ((context) => HomeScreen())));
                   },

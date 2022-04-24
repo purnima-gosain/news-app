@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+//creating map and list to get response from api
 String? stringResponse;
 Map? mapResponse;
-Map? dataResponse;
 List? listResponse;
 
 class HomeScreen extends StatefulWidget {
@@ -17,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  //making asynchronous function to call api
   Future apiCall() async {
     http.Response response;
     response = await http.get(Uri.parse(
@@ -24,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (response.statusCode == 200) {
       setState(() {
-        //stringResponse = response.body;
+        //geting the data of the body
         mapResponse = json.decode(response.body);
         listResponse = mapResponse!["articles"];
       });
@@ -63,8 +64,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Card(
                       child: Column(
                         children: [
+                          //getting the url of the image from the api
                           Image.network(listResponse![index]["urlToImage"],
                               height: 250, width: 380, fit: BoxFit.cover),
+                          //getting title and description from the api
                           ListTile(
                             title: Text(
                               listResponse![index]["title"].toString(),
@@ -79,6 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 },
+                //making itemcount equals to the length of the listResponse
                 itemCount: listResponse == null ? 0 : listResponse?.length,
               ),
             ),
@@ -86,30 +90,3 @@ class _HomeScreenState extends State<HomeScreen> {
         ]));
   }
 }
-
-
-// ListView.builder(
-//             itemBuilder: (context, index) {
-//               return Padding(
-//                 padding: const EdgeInsets.fromLTRB(10, 8.0, 8.0, 10),
-//                 child: Card(
-//                   child: Column(
-//                     children: [
-//                       Image.network(listResponse![index]["urlToImage"],
-//                           height: 250, width: 380, fit: BoxFit.cover),
-//                       ListTile(
-//                         title: Text(
-//                           listResponse![index]["title"].toString(),
-//                           style: const TextStyle(
-//                               fontSize: 20, fontWeight: FontWeight.bold),
-//                         ),
-//                         subtitle: Text(
-//                             listResponse![index]["description"].toString()),
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               );
-//             },
-//             itemCount: listResponse == null ? 0 : listResponse?.length,
-//           )
